@@ -75,13 +75,6 @@ const getUserWithId = function(id) {
  * @param {{name: string, password: string, email: string}} user
  * @return {Promise<{}>} A promise to the user.
  */
-// const addUser = function(user) {
-//   const userId = Object.keys(users).length + 1;
-//   user.id = userId;
-//   users[userId] = user;
-//   return Promise.resolve(user);
-// };
-
 const addUser = function(user) {
   return pool
     .query(
@@ -91,15 +84,12 @@ const addUser = function(user) {
       [user.name, user.email, user.password]
     )
     .then((result) => {
-      //console.log('in .then of addUser', result);
       return result.rows[0];
     })
     .catch((error) => {
-      //console.log('in .catch of addUser', error.message);
     });
 };
 /// Reservations
-
 /**
  * Get all reservations for a single user.
  * @param {string} guest_id The id of the user.
@@ -118,7 +108,6 @@ const getAllReservations = function(guest_id, limit = 10) {
      LIMIT $2;`, [guest_id,limit]
     )
     .then((result) => {
-      console.log("in .then of getAllReservations", result);
       return result.rows;
     })
     .catch((error) => {
@@ -152,7 +141,6 @@ const getAllProperties = function (options, limit = 10) {
   if (options.city) {
     queryParams.push(`%${options.city}%`);
     queryString += `WHERE city LIKE $${queryParams.length} `;
-    console.log(queryString,"QString FROM CITY OPTIONS")
   }
   //Query for Price search, both fields have to be not null
   if(options.minimum_price_per_night && options.maximum_price_per_night) {
@@ -165,7 +153,6 @@ const getAllProperties = function (options, limit = 10) {
     queryParams.push(options.minimum_price_per_night *100);
     queryParams.push(options.maximum_price_per_night *100);
     queryString += `properties.cost_per_night BETWEEN $${queryParams.length-1} AND $${queryParams.length}`
-    console.log(queryParams, "console test from pricing")
   }
   if (options.minimum_rating) {
     if (options.city||(options.minimum_price_per_night && options.maximum_price_per_night)) {
