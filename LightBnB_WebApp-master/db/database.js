@@ -41,7 +41,6 @@ const getUserWithEmail = function(email) {
     .query(`SELECT * FROM users
     WHERE email = $1`, [email])
     .then((result) => {
-      console.log('in .then user query',result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -62,7 +61,6 @@ const getUserWithId = function(id) {
     .query(`SELECT * FROM users
     WHERE id = $1`, [id])
     .then((result) => {
-      console.log('in .then of GetUserwithId', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
