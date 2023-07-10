@@ -1,6 +1,6 @@
 # LightBnB
 
-https://github.com/myfootsasleep/LightBnB/blob/master/LightBnB_WebApp-master/2023-07-10-01-38-19-min.gif
+![]https://github.com/myfootsasleep/LightBnB/blob/master/LightBnB_WebApp-master/2023-07-10-01-38-19-min.gif
 
 Sample of features of the WebApp
 
